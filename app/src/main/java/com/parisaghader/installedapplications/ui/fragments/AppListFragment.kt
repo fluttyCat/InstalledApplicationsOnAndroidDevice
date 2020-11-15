@@ -30,6 +30,7 @@ class AppListFragment : Fragment(R.layout.fragment_app_list) {
     }
 
     private fun setupRecyclerView() {
+
         val installedAppList = getInstalledApps()
         val adapter = AppListAdapter(installedAppList)
 
@@ -74,8 +75,6 @@ class AppListFragment : Fragment(R.layout.fragment_app_list) {
             val item = InstalledAppItem(icon, appName)
             list += item
 
-//             dialogIv.setImageDrawable(icon)
-//             dialogTv.text = appName
         }
         return list
     }

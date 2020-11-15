@@ -33,6 +33,7 @@ class AppListAdapter(var list: List<InstalledAppItem>) :
 
 //        val currentItem = differ.currentList[position]
 
+
         holder.itemView.apply {
             circleImageView.setImageDrawable(list[position].image)
             appName.text = list[position].appName

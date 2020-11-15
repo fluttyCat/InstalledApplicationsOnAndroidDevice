@@ -3,11 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/appListFragment">
+    app:startDestination="@id/viewPagerFragment">
 
     <fragment
         android:id="@+id/appListFragment"
         android:name="com.parisaghader.installedapplications.ui.fragments.AppListFragment"
         android:label="fragment_app_list"
         tools:layout="@layout/fragment_app_list" />
+    <fragment
+        android:id="@+id/viewPagerFragment"
+        android:name="com.parisaghader.installedapplications.ui.fragments.ViewPagerFragment"
+        android:label="fragment_view_pager"
+        tools:layout="@layout/fragment_view_pager" />
 </navigation>
