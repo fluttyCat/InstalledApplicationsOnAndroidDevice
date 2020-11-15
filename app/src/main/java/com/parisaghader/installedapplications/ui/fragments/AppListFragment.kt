@@ -1,16 +1,13 @@
 package com.parisaghader.installedapplications.ui.fragments
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import com.parisaghader.installedapplications.InstalledAppItem
 import com.parisaghader.installedapplications.R
 import com.parisaghader.installedapplications.adapters.AppListAdapter
-import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.fragment_app_list.*
 import java.util.*
 
@@ -20,22 +17,45 @@ class AppListFragment : Fragment(R.layout.fragment_app_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val exampleList = generateDummyList(40)
+        /*val exampleList = generateDummyList(40)*/
+
+        val exampleList = getInstalledApps()
 
         val adapter = AppListAdapter(exampleList)
 
-        rvAppList.layoutManager = GridLayoutManager(requireContext(),3)
+        rvAppList.layoutManager = GridLayoutManager(requireContext(), 3)
         rvAppList.adapter = adapter
 
 
-        adapter.setOnItemClickListener {
-            Toasty.success(requireContext(), "hello", Toast.LENGTH_SHORT, true).show()
-        }
+        /* adapter.setOnItemClickListener {
+             Toasty.success(requireContext(), "hello", Toast.LENGTH_SHORT, true).show()
+         }*/
 
     }
 
 
-    private fun generateDummyList(size: Int): List<InstalledAppItem> {
+    private fun getInstalledApps(): List<InstalledAppItem> {
+        val packageManager: PackageManager = requireActivity().packageManager
+
+        val list = ArrayList<InstalledAppItem>()
+
+        val appInfo = packageManager.getInstalledPackages(0)
+
+        for (i in 0 until appInfo.size) {
+            val p = appInfo[i]
+
+            val appName = p.applicationInfo.loadLabel(packageManager).toString()
+
+            val icon = p.applicationInfo.loadIcon(packageManager)
+
+            val item = InstalledAppItem(icon, appName)
+            list += item
+        }
+        return list
+    }
+
+
+    /*private fun generateDummyList(size: Int): List<InstalledAppItem> {
 
         val list = ArrayList<InstalledAppItem>()
 
@@ -51,5 +71,5 @@ class AppListFragment : Fragment(R.layout.fragment_app_list) {
         }
         return list
     }
-
+*/
 }

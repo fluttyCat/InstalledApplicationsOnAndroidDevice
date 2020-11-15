@@ -3,6 +3,7 @@ package com.parisaghader.installedapplications.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.parisaghader.installedapplications.InstalledAppItem
 import com.parisaghader.installedapplications.R
@@ -46,12 +47,14 @@ class AppListAdapter(var list: List<InstalledAppItem>) :
 //        val currentItem = differ.currentList[position]
 
         holder.itemView.apply {
-            circleImageView.setImageResource(list[position].image)
+            circleImageView.setImageDrawable(list[position].image)
 
             appName.text = list[position].appName
 
             setOnClickListener {
-                onItemClickListener
+                onItemClickListener.let {
+                    Toast.makeText(context,"hello",Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

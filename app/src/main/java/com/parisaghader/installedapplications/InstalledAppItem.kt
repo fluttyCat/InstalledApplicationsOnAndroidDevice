@@ -1,3 +1,5 @@
 package com.parisaghader.installedapplications
 
-data class InstalledAppItem(val image: Int, val appName: String)
+import android.graphics.drawable.Drawable
+
+data class InstalledAppItem(val image: Drawable, val appName: String)
