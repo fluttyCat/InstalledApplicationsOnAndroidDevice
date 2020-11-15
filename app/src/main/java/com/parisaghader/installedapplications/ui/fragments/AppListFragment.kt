@@ -19,7 +19,9 @@ class AppListFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         /*val exampleList = generateDummyList(40)*/
+
         setupRecyclerView()
     }
 
@@ -74,6 +76,11 @@ class AppListFragment(
         }
         return list
     }
+
+
+
+
+
 
 
     /*private fun generateDummyList(size: Int): List<InstalledAppItem> {
