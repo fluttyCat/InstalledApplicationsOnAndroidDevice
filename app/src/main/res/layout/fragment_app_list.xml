@@ -19,8 +19,8 @@
         android:id="@+id/rvAppList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="40dp"
+        android:paddingTop="20dp"
+        app:spanCount="4"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="3"
         tools:listitem="@layout/installed_app_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>

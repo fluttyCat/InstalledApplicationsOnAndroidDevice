@@ -1,4 +1,4 @@
-package com.parisaghader.installedapplications
+package com.parisaghader.installedapplications.models
 
 import android.graphics.drawable.Drawable
 

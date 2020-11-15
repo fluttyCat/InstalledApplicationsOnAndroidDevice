@@ -1,13 +1,18 @@
 package com.parisaghader.installedapplications.ui.fragments
 
+import android.app.Dialog
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.parisaghader.installedapplications.InstalledAppItem
 import com.parisaghader.installedapplications.R
 import com.parisaghader.installedapplications.adapters.AppListAdapter
+import com.parisaghader.installedapplications.models.InstalledAppItem
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.fragment_app_list.*
 import java.util.*
 
@@ -19,20 +24,38 @@ class AppListFragment : Fragment(R.layout.fragment_app_list) {
 
         /*val exampleList = generateDummyList(40)*/
 
-        val exampleList = getInstalledApps()
+        setupRecyclerView()
 
-        val adapter = AppListAdapter(exampleList)
-
-        rvAppList.layoutManager = GridLayoutManager(requireContext(), 3)
-        rvAppList.adapter = adapter
-
-
-        /* adapter.setOnItemClickListener {
-             Toasty.success(requireContext(), "hello", Toast.LENGTH_SHORT, true).show()
-         }*/
 
     }
 
+    private fun setupRecyclerView() {
+        val installedAppList = getInstalledApps()
+        val adapter = AppListAdapter(installedAppList)
+
+        rvAppList.layoutManager = GridLayoutManager(requireContext(), 4)
+        rvAppList.adapter = adapter
+
+
+        adapter.setOnItemClickListener {}
+
+
+
+//            Toasty.success(requireContext(), "hello", Toast.LENGTH_SHORT, true).show()
+            /*  val dialogBuilder = AlertDialog.Builder(requireContext())
+
+              val inflater: LayoutInflater = requireActivity().layoutInflater
+
+              val dialogView: View = inflater.inflate(R.layout.custom_dialog, null)
+              dialogBuilder.setView(dialogView)
+              dialogBuilder.show()
+
+  //            val alertDialog: AlertDialog = dialogBuilder.create()
+  //            alertDialog.show()
+  */
+
+
+    }
 
     private fun getInstalledApps(): List<InstalledAppItem> {
         val packageManager: PackageManager = requireActivity().packageManager
@@ -50,6 +73,9 @@ class AppListFragment : Fragment(R.layout.fragment_app_list) {
 
             val item = InstalledAppItem(icon, appName)
             list += item
+
+//             dialogIv.setImageDrawable(icon)
+//             dialogTv.text = appName
         }
         return list
     }
