@@ -16,18 +16,18 @@ class AppListFragment(
     private val endIndex: Int,
 ) : Fragment(R.layout.fragment_app_list) {
 
+    companion object{
+        var InstalledApps = arrayListOf<InstalledAppItem>()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        /*val exampleList = generateDummyList(40)*/
-
         setupRecyclerView()
     }
 
     private fun setupRecyclerView() {
         val installedAppList = arrayListOf<InstalledAppItem>()
-        getInstalledApps().forEachIndexed { index, installedAppItem ->
+        InstalledApps.forEachIndexed { index, installedAppItem ->
             if (index in startIndex until endIndex) {
                 installedAppList.add(installedAppItem)
             }
@@ -37,67 +37,6 @@ class AppListFragment(
         rvAppList.layoutManager = GridLayoutManager(requireContext(), 4)
         rvAppList.adapter = adapter
         adapter.setOnItemClickListener {}
-
-
-
-//            Toasty.success(requireContext(), "hello", Toast.LENGTH_SHORT, true).show()
-        /*  val dialogBuilder = AlertDialog.Builder(requireContext())
-
-          val inflater: LayoutInflater = requireActivity().layoutInflater
-
-          val dialogView: View = inflater.inflate(R.layout.custom_dialog, null)
-          dialogBuilder.setView(dialogView)
-          dialogBuilder.show()
-
-//            val alertDialog: AlertDialog = dialogBuilder.create()
-//            alertDialog.show()
-*/
-
-
     }
 
-    private fun getInstalledApps(): List<InstalledAppItem> {
-        val packageManager: PackageManager = requireActivity().packageManager
-
-        val list = ArrayList<InstalledAppItem>()
-
-        val appInfo = packageManager.getInstalledPackages(0)
-
-        for (i in 0 until appInfo.size) {
-            val p = appInfo[i]
-
-            val appName = p.applicationInfo.loadLabel(packageManager).toString()
-
-            val icon = p.applicationInfo.loadIcon(packageManager)
-
-            val item = InstalledAppItem(icon, appName)
-            list += item
-
-        }
-        return list
-    }
-
-
-
-
-
-
-
-    /*private fun generateDummyList(size: Int): List<InstalledAppItem> {
-
-        val list = ArrayList<InstalledAppItem>()
-
-        for (i in 0 until size) {
-
-            val drawable = when (i % 3) {
-                0 -> R.drawable.ic_android
-                1 -> R.drawable.ic_audiotrack
-                else -> R.drawable.ic_sun
-            }
-            val item = InstalledAppItem(drawable, "appName $i")
-            list += item
-        }
-        return list
-    }
-*/
 }

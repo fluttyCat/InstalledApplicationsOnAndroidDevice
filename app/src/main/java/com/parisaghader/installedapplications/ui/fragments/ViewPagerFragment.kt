@@ -20,11 +20,11 @@ class ViewPagerFragment : Fragment(R.layout.fragment_view_pager) {
         var startIndex = 0
         var endIndex = 0
         for (i in getInstalledApps().indices) {
-            if (counter == 19) {
+            if (counter == 20) {
                 endIndex = i
                 fragments.add(AppListFragment(startIndex, endIndex))
                 counter = -1
-                startIndex = i
+                startIndex = i + 1
             }
             counter += 1
         }
@@ -63,6 +63,7 @@ class ViewPagerFragment : Fragment(R.layout.fragment_view_pager) {
             list += item
 
         }
+        AppListFragment.InstalledApps = list
         return list
     }
 
